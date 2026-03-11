@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI } from '@google/genai';
 import html2canvas from 'html2canvas';
 import { Download, RefreshCw, Palette, Edit3 } from 'lucide-react';
-
-// 使用 VITE_GEMINI_API_KEY 以支持 Vercel 部署
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
 // 古典配色方案
 const COLOR_SCHEMES = [
