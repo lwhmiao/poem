@@ -1,0 +1,5 @@
+{
+  "name": "每日诗词",
+  "description": "随机生成中文古诗句和释义，支持导出为图片。",
+  "requestFramePermissions": []
+}
