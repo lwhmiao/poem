@@ -630,7 +630,13 @@ export default function App() {
   };
 
   const formatPoem = (text: string) => {
-    // 尝试按逗号或句号分行，保持对仗美感
+    // 如果用户手动输入了换行符，优先按换行符分割
+    if (text.includes('\n')) {
+      return text.split('\n').map((line, index) => (
+        <p key={index}>{line}</p>
+      ));
+    }
+    // 否则尝试按逗号或分号分行，保持对仗美感
     const parts = text.split(/，|；/);
     if (parts.length === 2) {
       return (
@@ -661,13 +667,13 @@ export default function App() {
           </h3>
           <div className="space-y-4 font-sans">
             <div>
-              <label className="block text-xs text-white/50 mb-1.5 pl-1">诗句 (建议用逗号或空格分隔)</label>
-              <input
-                type="text"
+              <label className="block text-xs text-white/50 mb-1.5 pl-1">诗句 (支持换行编辑)</label>
+              <textarea
                 value={poem}
                 onChange={(e) => setPoem(e.target.value)}
                 placeholder="例如：人心本是云边月，聚散原如陌上尘"
-                className="w-full bg-[#1a1a1a] text-white/90 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#4A5D4E] transition-colors"
+                rows={3}
+                className="w-full bg-[#1a1a1a] text-white/90 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#4A5D4E] transition-colors resize-none"
               />
             </div>
             <div>
@@ -792,7 +798,7 @@ export default function App() {
                 【释义】
               </h3>
               <p 
-                className={`text-[14px] sm:text-[15px] leading-[1.7] sm:leading-[1.8] text-justify font-serif ${isCapturing ? '' : 'line-clamp-4 sm:line-clamp-none'} ${transitionClass}`}
+                className={`px-3 sm:px-5 text-[14px] sm:text-[15px] leading-[1.7] sm:leading-[1.8] text-justify font-serif ${isCapturing ? '' : 'line-clamp-4 sm:line-clamp-none'} ${transitionClass}`}
                 style={{ color: currentColors.textSecondary }}
               >
                 {explanation || '...'}
